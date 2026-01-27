@@ -1,4 +1,5 @@
-﻿using Dorimuth_Backend.Services;
+﻿using Dorimuth_Backend.DTO_s;
+using Dorimuth_Backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dorimuth_Backend.Controllers
@@ -30,6 +31,13 @@ namespace Dorimuth_Backend.Controllers
                 return NotFound();
             }
             return Ok(movie);
+        }
+
+        [HttpGet("filter")]
+        public async Task<IActionResult> GetFilteredMovies([FromQuery] MovieFilterDto filter)
+        {
+            var movies = await _movieService.GetFilteredMoviesAsync(filter);
+            return Ok(movies);
         }
     }
 }
